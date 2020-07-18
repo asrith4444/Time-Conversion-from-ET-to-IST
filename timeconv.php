@@ -1,14 +1,15 @@
 <?php
-    timeconvtoIST("2000-02-28 15:29:54");
-    function timeconvtoIST($s){
-        //$s="2020-03-31 15:29:54";
+// TimeConv v1.0
+// Author : Asrith Krishna, 18 July 2020.
+    echo timeconvtoIST("2000-02-28 15:29:54");
+    function timeconvtoIST($s){ //Converting EDT/ET/EST to IST which means adding 9:30 mins to ET time.
         $h = substr($s,11,2);
-        $a= intval($h)+9;
+        $a= intval($h)+9;  //Adding 9 hours.
         $m = substr($s,14,2);
-        $b = intval($m)+30;
+        $b = intval($m)+30;  //Adding 30 Mins.
         $date = substr($s,0,10);
         $sec = substr($s,17,2);
-        //$c = intval($d);
+        //After adding 9:30 mins we need to adjust the stable time.
         if($b>60){
             $b=numto30($b);
             $a=$a+1;
@@ -24,22 +25,23 @@
             }
         }
         $ist= $date.' '.$a.':'.$b.':'.$sec;
-        echo $ist;
+        //echo $ist;
+        return $ist;
     }      
-    function numto12(int $val){
+    function numto12(int $val){ //This function returns the updated hour
         for ($x = 0; $x < 9; $x++) {
             if($val-24==$x){
                 $y='0'.strval($x);
-                 echo "The hour is: $y <br>";
+                 //echo "The hour is: $y <br>";
                  return $y;       
             }
         }
     }
-    function numto30(int $val){
+    function numto30(int $val){ //This function returns the updated minute
         for ($x = 0; $x < 30; $x++) {
             if($val-60==$x){
                 $y=addstr0($x);
-                 echo "The minute is: $y <br>";
+                // echo "The minute is: $y <br>";
                  return $y;       
             }
         }
